@@ -38,10 +38,14 @@ public class MainView {
         GridData data = new GridData(SWT.FILL,
                 SWT.FILL, true, true,
                 2, 1);
-       folder.setLayoutData(data);
+        folder.setLayoutData(data);
         folder.setSelectionForeground(display.getSystemColor(SWT.COLOR_RED));
         CTabItem cTabItem1 = new CTabItem(folder, SWT.NONE);
-        cTabItem1.setText("Tab1");
+        cTabItem1.setText("Модели автомобилей");
+        //cTabItem1.
+        AutoModelView autoModelView = new AutoModelView(folder);
+
+
         CTabItem cTabItem2 = new CTabItem(folder, SWT.NONE);
         cTabItem2.setText("Tab2");
         CTabItem cTabItem3 = new CTabItem(folder, SWT.NONE);

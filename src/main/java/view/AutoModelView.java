@@ -4,6 +4,8 @@ package view;
 import dao.AutoModelDao;
 import model.AutoModel;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -16,14 +18,15 @@ public class AutoModelView {
 
     private Table table = null;
 
-    public AutoModelView(Shell shell) {
+    public AutoModelView(CTabFolder shell) {
 
         //Shell shell = new Shell(parentShell);
 
         GridLayout gridLayout = new GridLayout();
+
         gridLayout.numColumns = 3;
 
-        shell.setLayout(gridLayout);
+        //shell.setLayout(gridLayout);
 
         Label label = new Label(shell, SWT.NONE);
         label.setText("Модель автомобиля: ");
