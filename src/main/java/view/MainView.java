@@ -12,10 +12,6 @@ public class MainView {
     private static Display display = null;
     private static Shell shell = null;
 
-//    static {
-//
-//    }
-
     private MainView() { }
 
     public static Shell getShell() { return shell; }
@@ -30,32 +26,22 @@ public class MainView {
 
         setMenu();
 
-
- //       AutoModelView autoModelView = new AutoModelView(shell);
-
-
-        CTabFolder folder = new CTabFolder(shell, SWT.BOTTOM);
+        CTabFolder folder = new CTabFolder(shell, SWT.UP);
         GridData data = new GridData(SWT.FILL,
                 SWT.FILL, true, true,
                 2, 1);
         folder.setLayoutData(data);
-        folder.setSelectionForeground(display.getSystemColor(SWT.COLOR_RED));
         CTabItem cTabItem1 = new CTabItem(folder, SWT.NONE);
         cTabItem1.setText("Модели автомобилей");
-        //cTabItem1.
-        AutoModelView autoModelView = new AutoModelView(folder);
 
+        AutoModelView autoModelView = new AutoModelView(folder, cTabItem1);
 
         CTabItem cTabItem2 = new CTabItem(folder, SWT.NONE);
         cTabItem2.setText("Tab2");
         CTabItem cTabItem3 = new CTabItem(folder, SWT.NONE);
         cTabItem3.setText("Tab3");
 
-
         folder.pack();
-
-        //shell.layout();
-        //shell.pack();
         shell.open();
 
         while (!shell.isDisposed()) {
@@ -73,15 +59,7 @@ public class MainView {
         fileItem.setText ("Файл");
         Menu fileMenu = new Menu (shell, SWT.DROP_DOWN);
         fileItem.setMenu (fileMenu);
-//        MenuItem saveItem = new MenuItem (fileMenu, SWT.PUSH);
-//        saveItem.setText ("Сохранить\tCtrl+S");
-//        saveItem.setAccelerator (SWT.MOD1 + 'S');
-//        saveItem.addListener (SWT.Selection, new Listener() {
-//
-//            public void handleEvent(Event event) {
-//                shell.setModified (false);
-//            }
-//        });
+
         MenuItem exitItem =  new MenuItem (fileMenu, SWT.PUSH);
         exitItem.setText ("Выход\tCtrl+Q");
         exitItem.setAccelerator (SWT.MOD1 + 'Q');
@@ -105,8 +83,6 @@ public class MainView {
                 shell.close ();
             }
         });
-
-
 
     }
 }

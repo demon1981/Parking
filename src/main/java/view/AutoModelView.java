@@ -18,28 +18,30 @@ public class AutoModelView {
 
     private Table table = null;
 
-    public AutoModelView(CTabFolder shell) {
+    public AutoModelView(CTabFolder folder, CTabItem cTabItem) {
 
-        //Shell shell = new Shell(parentShell);
+        Shell shell = new Shell();
+
+        Composite content = new Composite(folder, SWT.NONE);
 
         GridLayout gridLayout = new GridLayout();
 
+        content.setLayout(gridLayout);
+
         gridLayout.numColumns = 3;
 
-        //shell.setLayout(gridLayout);
-
-        Label label = new Label(shell, SWT.NONE);
+        Label label = new Label(content, SWT.NONE);
         label.setText("Модель автомобиля: ");
         GridData gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
         label.setLayoutData(gridData);
 
-        final Text text = new Text(shell, SWT.BORDER);
+        final Text text = new Text(content, SWT.BORDER);
         gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
         text.setLayoutData(new GridData(150, SWT.DEFAULT));
 
-        final Button button = new Button(shell, SWT.NONE);
+        final Button button = new Button(content, SWT.NONE);
         gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
         button.setText("Save");
@@ -54,7 +56,7 @@ public class AutoModelView {
             }
         });
 
-        table = new Table(shell, SWT.VIRTUAL | SWT.BORDER);
+        table = new Table(content, SWT.VIRTUAL | SWT.BORDER);
         table.setLinesVisible(true);
         gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
@@ -64,14 +66,13 @@ public class AutoModelView {
         gridData.grabExcessHorizontalSpace = true;
         table.setLayoutData(gridData);
 
+        cTabItem.setControl(content);
+
         updateAutoModelList();
 
         label.pack();
         text.pack();
         button.pack();
-//        shell.layout();
-//        shell.pack();
-//        shell.open();
     }
 
     public void updateAutoModelList() {
