@@ -8,30 +8,30 @@ public class AutoCapacity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private int id;
+    private String capacity;
+    private double costOfParking;
 
-    private String Capacity;
-
-    private double CostOfParking;
+    public AutoCapacity(){}
 
     public AutoCapacity(String capacity, double costOfParking) {
-        Capacity = capacity;
-        CostOfParking = costOfParking;
+        this.capacity = capacity;
+        this.costOfParking = costOfParking;
     }
 
     public String getCapacity() {
-        return Capacity;
+        return capacity;
     }
 
     public void setCapacity(String capacity) {
-        Capacity = capacity;
+        this.capacity = capacity;
     }
 
     public double getCostOfParking() {
-        return CostOfParking;
+        return costOfParking;
     }
 
     public void setCostOfParking(double costOfParking) {
-        CostOfParking = costOfParking;
+        this.costOfParking = costOfParking;
     }
 }

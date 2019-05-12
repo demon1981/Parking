@@ -3,6 +3,7 @@ package view;
 
 import dao.AutoCapacityDao;
 import dao.CustomersDao;
+import model.AutoCapacity;
 import model.Customers;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -73,7 +74,7 @@ public class AutoCapacityView {
             @Override
             public void widgetSelected(SelectionEvent arg0) {
                 String name = textName.getText().trim();
-                String cost = textName.getText().trim();
+                String cost = textCostOfParcing.getText().trim();
                 if (name != "" & cost != "") {
                     new AutoCapacityDao().save(name, Double.valueOf(cost));
                     updateCustomersList();
@@ -82,7 +83,7 @@ public class AutoCapacityView {
             }
         });
 
-        table = new FormTable(content, Customers.class,  new CustomersDao());
+        table = new FormTable(content, AutoCapacity.class,  new AutoCapacityDao());
 
         cTabItem.setControl(content);
 
