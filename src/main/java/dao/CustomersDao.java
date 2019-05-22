@@ -2,63 +2,34 @@
 package dao;
 
 import model.Customers;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomersDao implements Dao{
+public class CustomersDao extends AbstractDao<Customers>{
 
     public Customers findById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Customers.class, id);
     }
 
     public void save(String name) {
-        save(new Customers(name));
+        super.save(new Customers(name));
     }
 
-    public void save(Customers name) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.save(name);
-        tx1.commit();
-        session.close();
+    public List<Customers> findAll() {
+        return super.findAll(Customers.class.getSimpleName());
     }
 
-    public void update(Customers name) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.update(name);
-        tx1.commit();
-        session.close();
-    }
+    public List<String[]> returnFieldsToView() {
 
-    public void delete(Customers name) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.delete(name);
-        tx1.commit();
-        session.close();
-    }
-//
-//    public Auto findAutoById(int id) {
-//        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Auto.class, id);
-//    }
-//
-    public List<String[]> findAll() {
-
-        List<String[]> customerslListString = new ArrayList<String[]>();
-
-        List<Customers> customerslList = (List<Customers>) HibernateSessionFactoryUtil.getSessionFactory()
-                                .openSession().createQuery("From Customers").list();
+        List<String[]> customersListString = new ArrayList<String[]>();
+        List<Customers> customersList = findAll();
 
         for (Customers customers :
-                customerslList) {
-            customerslListString.add(new String[]{customers.getName()});
+                customersList) {
+            customersListString.add(new String[]{customers.getName()});
         }
-
-        return customerslListString;
+        return customersListString;
     }
 }

@@ -29,7 +29,7 @@ public class AutoCapacityView {
         GridLayout gridLayout = new GridLayout();
         Composite content = new Composite(folder, SWT.NONE);
         content.setLayout(gridLayout);
-        gridLayout.numColumns = 3;
+        gridLayout.numColumns = 5;
 
         CTabItem cTabItem = new CTabItem(folder, SWT.CLOSE);
         cTabItem.setText("Грузоподемность автомобилей");
@@ -45,7 +45,7 @@ public class AutoCapacityView {
         final Text textName = new Text(content, SWT.BORDER);
         gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
-        textName.setLayoutData(new GridData(150, SWT.DEFAULT));
+        textName.setLayoutData(gridData);
 
         //поле стоимости стоянки
         Label labelCostOfParcing = new Label(content, SWT.NONE);
@@ -57,14 +57,14 @@ public class AutoCapacityView {
         final Text textCostOfParcing = new Text(content, SWT.BORDER);
         gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
-        textCostOfParcing.setLayoutData(new GridData(150, SWT.DEFAULT));
+        textCostOfParcing.setLayoutData(gridData);
 
         textCostOfParcing.addVerifyListener(new VerifyListener() {
             public void verifyText(VerifyEvent verifyEvent) {
-                System.out.println(textCostOfParcing);
+                if ( ! Character.isDigit(verifyEvent.character) )
+                    verifyEvent.doit = false;
             }
         });
-
 
         final Button button = new Button(content, SWT.NONE);
         gridData = new GridData();

@@ -37,7 +37,7 @@ public class MainView {
         folder.setLayoutData(data);
         //folder.setSelection(0);
 
-        //AutoModelView autoModelView = new AutoModelView(folder);
+        ParkingEventView parkingEventView = new ParkingEventView(folder);
         new MainMenu(shell, folder);
 
         folder.pack();

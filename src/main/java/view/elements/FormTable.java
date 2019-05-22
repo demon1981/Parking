@@ -1,7 +1,6 @@
 package view.elements;
 
 import dao.Dao;
-import model.AutoModel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -29,7 +28,7 @@ public class FormTable {
         table.setLinesVisible(true);
         GridData gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
-        gridData.horizontalSpan = 3;
+        gridData.horizontalSpan = 5;
         gridData.verticalAlignment = GridData.FILL;
         gridData.grabExcessVerticalSpace = true;
         gridData.grabExcessHorizontalSpace = true;
@@ -60,7 +59,7 @@ public class FormTable {
 
     public void update() {
         removeAll();
-        List<String[]> allFildsModel = dao.findAll();
+        List<String[]> allFildsModel = dao.returnFieldsToView();
 
         Integer num = 0;
         for (String[] filds: allFildsModel) {
