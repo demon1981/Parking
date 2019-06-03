@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -11,31 +12,36 @@ public class ParkingEvent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "autoModel_id", referencedColumnName = "id")
     private AutoModel autoModel;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "customers_id", referencedColumnName = "id")
     private Customers customers;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "autoCapacity_id", referencedColumnName = "id")
     private AutoCapacity autoCapacity;
 
+    //private Timestamp dateIn;
     private Date dateIn;
     private Date dateOut;
 
-    private Double sum;
+    private double amountOfParking;
 
-    public ParkingEvent() {  }
+    public ParkingEvent() {   }
 
     public ParkingEvent(AutoModel autoModel, Customers customers, AutoCapacity autoCapacity) {
         this.autoModel = autoModel;
-        this.customers = customers;
-        this.autoCapacity = autoCapacity;
+//        this.customers = customers;
+//        this.autoCapacity = autoCapacity;
+//        this.dateIn = new Date();
     }
 
-    public void setDateOut(Date dateOut) {
-        this.dateOut = dateOut;
-
-
-    }
+//    public void setDateOut(Date dateOut) {
+//        this.dateOut = dateOut;
+//
+//
+//    }
 
 
 }

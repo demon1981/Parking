@@ -26,6 +26,9 @@ public class ParkingEventView {
 
         CTabItem cTabItem = new CTabItem(folder, SWT.NONE);
         cTabItem.setText("Автомобили на парковке");
+
+
+
         folder.setSelection(cTabItem);
 
         //Поле наименования грузоподъемнсти
@@ -81,7 +84,7 @@ public class ParkingEventView {
 //                String cost = textCostOfParcing.getText().trim();
 //                if (name != "" & cost != "") {
 //                    new AutoCapacityDao().save(name, Double.valueOf(cost));
-//                    updateCustomersList();
+//                    updateTable();
 //                    textName.setText("");
 //                }
 //            }
@@ -91,14 +94,14 @@ public class ParkingEventView {
 
         cTabItem.setControl(content);
 
-        updateCustomersList();
+        updateTable();
 
 //        labelName.pack();
 //        textName.pack();
 //        button.pack();
     }
 
-    public void updateCustomersList() {
+    public void updateTable() {
         table.update();
     }
 

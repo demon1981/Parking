@@ -36,10 +36,10 @@ public abstract class AbstractDao <T> implements Dao{
         session.close();
     }
 
-    public List<T> findAll(String className) {
+    public List<T> findAll(Class<T> clazz) {
 
        List<T> objectList = (List<T>) HibernateSessionFactoryUtil.getSessionFactory()
-                .openSession().createQuery("From " + className).list();
+                .openSession().createQuery("From " + clazz.getSimpleName()).list();
 
         return objectList;
     }

@@ -19,7 +19,7 @@ public class AutoCapacityDao extends AbstractDao<AutoCapacity>{
 
 
     public List<AutoCapacity> findAll() {
-        return super.findAll(AutoCapacity.class.getSimpleName());
+        return super.findAll(AutoCapacity.class);
     }
 
     public List<String[]> returnFieldsToView() {

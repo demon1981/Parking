@@ -18,7 +18,7 @@ public class AutoModelDao extends AbstractDao<AutoModel>{
     }
 
     public List<AutoModel> findAll() {
-        return super.findAll(AutoModel.class.getSimpleName());
+        return super.findAll(AutoModel.class);
     }
 
     public List<String[]> returnFieldsToView() {

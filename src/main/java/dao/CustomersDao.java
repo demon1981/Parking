@@ -18,7 +18,7 @@ public class CustomersDao extends AbstractDao<Customers>{
     }
 
     public List<Customers> findAll() {
-        return super.findAll(Customers.class.getSimpleName());
+        return super.findAll(Customers.class);
     }
 
     public List<String[]> returnFieldsToView() {

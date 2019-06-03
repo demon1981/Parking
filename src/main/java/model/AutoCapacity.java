@@ -13,7 +13,7 @@ public class AutoCapacity {
     private double costOfParking;
 
     public AutoCapacity(){}
-
+    
     public AutoCapacity(String capacity, double costOfParking) {
         this.capacity = capacity;
         this.costOfParking = costOfParking;

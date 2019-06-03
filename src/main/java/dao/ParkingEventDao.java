@@ -20,19 +20,20 @@ public class ParkingEventDao extends AbstractDao<ParkingEvent> {
     }
 
     public List<ParkingEvent> findAll() {
-        return super.findAll(ParkingEvent.class.getSimpleName());
+        return super.findAll(ParkingEvent.class);
     }
 
     public List<String[]> returnFieldsToView() {
 
         List<String[]> parkingEventListString = new ArrayList<String[]>();
-//        List<ParkingEvent> parkingEventlList = (List<ParkingEvent>) HibernateSessionFactoryUtil.getSessionFactory()
-//                .openSession().createQuery("From ParkingEvent").list();
-//
-//        for (ParkingEvent parkingEvent :
-//                parkingEventlList) {
-//            parkingEventListString.add(new String[]{parkingEvent.toString()});
-//        }
+        /*List<ParkingEvent> parkingEventList = (List<ParkingEvent>) HibernateSessionFactoryUtil.getSessionFactory()
+                .openSession().createQuery("From ParkingEvent").list();*/
+        List<ParkingEvent> parkingEventList = super.findAll(ParkingEvent.class);
+
+        for (ParkingEvent parkingEvent :
+                parkingEventList) {
+            parkingEventListString.add(new String[]{parkingEvent.toString()});
+        }
 
         return parkingEventListString;
     }
