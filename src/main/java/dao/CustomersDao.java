@@ -28,7 +28,7 @@ public class CustomersDao extends AbstractDao<Customers>{
 
         for (Customers customers :
                 customersList) {
-            customersListString.add(new String[]{customers.getName()});
+            customersListString.add(new String[]{ String.valueOf(customers.getId()), customers.getName()});
         }
         return customersListString;
     }

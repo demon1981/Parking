@@ -1,14 +1,22 @@
 package view;
 
+import dao.AutoCapacityDao;
 import dao.AutoModelDao;
+import dao.CustomersDao;
 import dao.ParkingEventDao;
+import model.AutoCapacity;
+import model.AutoModel;
+import model.Customers;
 import model.ParkingEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
+import view.elements.FormCombo;
 import view.elements.FormTable;
 
 import java.util.List;
@@ -22,90 +30,67 @@ public class ParkingEventView {
         GridLayout gridLayout = new GridLayout();
         Composite content = new Composite(folder, SWT.NONE);
         content.setLayout(gridLayout);
-        gridLayout.numColumns = 3;
+        gridLayout.numColumns = 2;
 
         CTabItem cTabItem = new CTabItem(folder, SWT.NONE);
         cTabItem.setText("Автомобили на парковке");
-
-
 
         folder.setSelection(cTabItem);
 
         //Поле наименования грузоподъемнсти
         Label labelName = new Label(content, SWT.NONE);
         labelName.setText("Марка : ");
-        GridData gridData = new GridData();
-        gridData.horizontalAlignment = SWT.FILL;
-        labelName.setLayoutData(gridData);
+        labelName.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+        final FormCombo<AutoModel> autoModelCombo = new FormCombo(content, new AutoModelDao(), AutoModel.class);
 
-        Combo autoModelCombo = new Combo(content, SWT.NONE);
-//
-        List<String[]> autoModelList = new AutoModelDao().returnFieldsToView();
-        for (String[] filds: autoModelList) {
-            autoModelCombo.add(filds[0]);
-        }
-        //autoModelCombo.setItems(new AutoModelDao().returnFieldsToView());
-        autoModelCombo.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+        labelName = new Label(content, SWT.NONE);
+        labelName.setText("Клиент : ");
+        labelName.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+        final FormCombo<Customers> customersCombo = new FormCombo(content, new CustomersDao(), Customers.class);
 
-//
-//        final Text textName = new Text(content, SWT.BORDER);
-//        gridData = new GridData();
-//        gridData.horizontalAlignment = SWT.FILL;
-//        textName.setLayoutData(new GridData(150, SWT.DEFAULT));
-//
-//        //поле стоимости стоянки
-//        Label labelCostOfParcing = new Label(content, SWT.NONE);
-//        labelCostOfParcing.setText("Стоимость стояноки(сут.): ");
-//        gridData = new GridData();
-//        gridData.horizontalAlignment = SWT.FILL;
-//        labelCostOfParcing.setLayoutData(gridData);
-//
-//        final Text textCostOfParcing = new Text(content, SWT.BORDER);
-//        gridData = new GridData();
-//        gridData.horizontalAlignment = SWT.FILL;
-//        textCostOfParcing.setLayoutData(new GridData(150, SWT.DEFAULT));
-//
-//        textCostOfParcing.addVerifyListener(new VerifyListener() {
-//            public void verifyText(VerifyEvent verifyEvent) {
-//
-//                System.out.println(textCostOfParcing);
-//            }
-//        });
+        labelName = new Label(content, SWT.NONE);
+        labelName.setText("Грузоподъемность : ");
+        labelName.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+        final FormCombo<AutoCapacity> autoCapasityCombo = new FormCombo(content, new AutoCapacityDao(), AutoCapacity.class);
+
+        final Button saveButton = new Button(content, SWT.NONE);
+        saveButton.setText("Save");
+        saveButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent arg0) {
+
+                if (autoModelCombo.getSelectIndex() != -1 & customersCombo.getSelectIndex() != -1 &
+                        autoCapasityCombo.getSelectIndex() != -1) {
+
+                    new ParkingEventDao().save(autoModelCombo.getSelectObject(), customersCombo.getSelectObject(), autoCapasityCombo.getSelectObject());
+                    updateTable();
+
+                }
+            }
+        });
 
 
-//        final Button button = new Button(content, SWT.NONE);
-//        gridData = new GridData();
-//        gridData.horizontalAlignment = SWT.FILL;
-//        button.setText("Save");
-//        button.addSelectionListener(new SelectionAdapter() {
-//            @Override
-//            public void widgetSelected(SelectionEvent arg0) {
-//                String name = textName.getText().trim();
-//                String cost = textCostOfParcing.getText().trim();
-//                if (name != "" & cost != "") {
-//                    new AutoCapacityDao().save(name, Double.valueOf(cost));
-//                    updateTable();
-//                    textName.setText("");
-//                }
-//            }
-//        });
+        final Button setTimeButton = new Button(content, SWT.NONE);
+        setTimeButton.setText("Выезд");
+        setTimeButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent arg0) {
 
-        table = new FormTable(content, ParkingEvent.class,  new ParkingEventDao());
+                ParkingEvent selectEvent = (ParkingEvent) table.getSelectObject();
+                selectEvent.checkOutCar();
+                new ParkingEventDao().update(selectEvent);
+                updateTable();
+            }
+        });
+
+        table = new FormTable(content, ParkingEvent.class, new ParkingEventDao());
 
         cTabItem.setControl(content);
 
         updateTable();
-
-//        labelName.pack();
-//        textName.pack();
-//        button.pack();
     }
 
     public void updateTable() {
         table.update();
     }
-
-
-
-
 }

@@ -29,7 +29,7 @@ public class AutoModelDao extends AbstractDao<AutoModel>{
 
         for (AutoModel autoModel :
                 autoModelList) {
-            autoModelListString.add(new String[]{autoModel.getName()});
+            autoModelListString.add(new String[]{String.valueOf(autoModel.getId()), autoModel.getName()});
         }
 
         return autoModelListString;

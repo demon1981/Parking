@@ -19,6 +19,8 @@ public class AutoCapacity {
         this.costOfParking = costOfParking;
     }
 
+    public int getId() { return id; }
+
     public String getCapacity() {
         return capacity;
     }

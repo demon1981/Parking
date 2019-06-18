@@ -6,7 +6,7 @@ import utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
 
-public abstract class AbstractDao <T> implements Dao{
+public abstract class AbstractDao <T> implements Dao <T>{
 
     public T findById(Class<T> genericType, int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(genericType, id);

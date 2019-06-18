@@ -17,13 +17,15 @@ public class FormTable {
     private Dao dao;
     private Table table;
     private List<TableColumn> tableColumns;
+    private Class clazz;
 
 
     public FormTable(Composite composite, Class className, Dao dao) {
 
-        this.table = new Table(composite, SWT.VIRTUAL | SWT.BORDER);
+        this.table = new Table(composite, SWT.VIRTUAL | SWT.BORDER | SWT.FULL_SELECTION);
         this.tableColumns = new ArrayList<TableColumn>();
         this.dao = dao;
+        this.clazz = className;
 
         table.setLinesVisible(true);
         GridData gridData = new GridData();
@@ -43,7 +45,7 @@ public class FormTable {
 
         for (Field classFild : fieldList) {
 
-            if (classFild.getName() == "id") continue;
+            //if (classFild.getName() == "id") continue;
 
             column = new TableColumn(table, SWT.CENTER);
             column.setText(classFild.getName());
@@ -62,14 +64,19 @@ public class FormTable {
         List<String[]> allFildsModel = dao.returnFieldsToView();
 
         Integer num = 0;
-        for (String[] filds: allFildsModel) {
+        for (String[] filds : allFildsModel) {
             TableItem item = new TableItem(this.table, SWT.NONE);
             item.setText(0, (++num).toString());
 
             for (int i = 0; i < filds.length; i++) {
-                item.setText(i+1, filds[i].toString());
+                item.setText(i + 1, filds[i]);
             }
         }
-
     }
+
+    public Object getSelectObject() {
+        int id = Integer.parseInt(table.getSelection()[0].getText(1));
+        return dao.findById(clazz, id);
+    }
+
 }

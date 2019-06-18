@@ -31,4 +31,6 @@ public class AutoModel {
         return name;
     }
 
+    public int getId() { return id; }
+
 }

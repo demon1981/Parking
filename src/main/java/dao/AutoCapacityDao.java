@@ -13,8 +13,8 @@ public class AutoCapacityDao extends AbstractDao<AutoCapacity>{
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(AutoCapacity.class, id);
     }
 
-    public void save(String name, double costOfParcing) {
-        save(new AutoCapacity(name, costOfParcing));
+    public void save(String name, double costOfParking) {
+        save(new AutoCapacity(name, costOfParking));
     }
 
 
@@ -29,7 +29,7 @@ public class AutoCapacityDao extends AbstractDao<AutoCapacity>{
 
         for (AutoCapacity autoCapacity :
                 customersList) {
-            customersListString.add(new String[]{autoCapacity.getCapacity(), Double.toString(autoCapacity.getCostOfParking())});
+            customersListString.add(new String[]{String.valueOf(autoCapacity.getId()), autoCapacity.getCapacity(), Double.toString(autoCapacity.getCostOfParking())});
         }
 
         return customersListString;
