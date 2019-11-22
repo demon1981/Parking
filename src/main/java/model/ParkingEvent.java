@@ -26,6 +26,8 @@ public class ParkingEvent {
     private long dateIn;
     private long dateOut;
 
+    private String carNumber;
+
     private double amountOfParking ;
 
     public ParkingEvent() {   }
@@ -43,6 +45,7 @@ public class ParkingEvent {
         return new String[]{String.valueOf(this.id),
                             this.autoModel.getName(),
                             this.customers.getName(),
+
                             this.autoCapacity.getCapacity(),
                             new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(this.dateIn)),
                             this.dateOut == 0 ? "" : new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(this.dateOut)),

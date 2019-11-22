@@ -1,6 +1,5 @@
 package view;
 
-
 import dao.AutoModelDao;
 import model.AutoModel;
 import org.eclipse.swt.SWT;
@@ -13,7 +12,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 import view.elements.FormTable;
 
-import java.util.List;
+import java.util.Calendar;
 
 public class AutoModelView {
 
