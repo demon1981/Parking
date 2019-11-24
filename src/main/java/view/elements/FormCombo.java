@@ -1,6 +1,5 @@
 package view.elements;
 
-import dao.AutoModelDao;
 import dao.Dao;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

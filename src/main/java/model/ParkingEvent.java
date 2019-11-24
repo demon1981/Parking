@@ -23,19 +23,20 @@ public class ParkingEvent {
     @JoinColumn(name = "autoCapacity_id", referencedColumnName = "id")
     private AutoCapacity autoCapacity;
 
+    private String autoNumber;
+
     private long dateIn;
     private long dateOut;
-
-    private String carNumber;
 
     private double amountOfParking ;
 
     public ParkingEvent() {   }
 
-    public ParkingEvent(AutoModel autoModel, Customers customers, AutoCapacity autoCapacity) {
+    public ParkingEvent(AutoModel autoModel, Customers customers, AutoCapacity autoCapacity, String autoNumber) {
         this.autoModel = autoModel;
         this.customers = customers;
         this.autoCapacity = autoCapacity;
+        this.autoNumber = autoNumber;
         this.dateIn = System.currentTimeMillis();
         this.amountOfParking = 0;
     }
@@ -43,16 +44,16 @@ public class ParkingEvent {
     public String[] getFildsArray() {
 
         return new String[]{String.valueOf(this.id),
-                            this.autoModel.getName(),
-                            this.customers.getName(),
-
-                            this.autoCapacity.getCapacity(),
-                            new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(this.dateIn)),
-                            this.dateOut == 0 ? "" : new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(this.dateOut)),
-                            String.valueOf(this.amountOfParking)};
+                this.autoModel.getName(),
+                this.customers.getName(),
+                this.autoCapacity.getCapacity(),
+                this.autoNumber,
+                new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(this.dateIn)),
+                this.dateOut == 0 ? "" : new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(this.dateOut)),
+                String.valueOf(this.amountOfParking)};
     }
 
-    public void setDateOut() {
+    private void setDateOut() {
         this.dateOut = System.currentTimeMillis();
     }
 
@@ -60,7 +61,7 @@ public class ParkingEvent {
         setDateOut();
         double autoCapacity = this.autoCapacity.getCostOfParking();
 
-        int dayOfParking = (int)  Math.ceil(((this.dateOut - this.dateIn) / (24 * 60 * 60 * 1000)));
+        int dayOfParking = (int)  Math.ceil((( (double) (this.dateOut - this.dateIn) ) / (24 * 60 * 60 * 1000)));
 
         this.amountOfParking = autoCapacity * dayOfParking;
     }

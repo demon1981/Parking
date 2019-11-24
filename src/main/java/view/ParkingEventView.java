@@ -53,6 +53,15 @@ public class ParkingEventView {
         labelName.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
         final FormCombo<AutoCapacity> autoCapasityCombo = new FormCombo(content, new AutoCapacityDao(), AutoCapacity.class);
 
+        labelName = new Label(content, SWT.NONE);
+        labelName.setText("Номер : ");
+        labelName.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+        //final FormCombo<AutoCapacity> autoCapasityCombo = new FormCombo(content, new AutoCapacityDao(), AutoCapacity.class);
+
+        final Text autoNumber = new Text(content, SWT.BORDER);
+        autoNumber.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
+
+
         final Button saveButton = new Button(content, SWT.NONE);
         saveButton.setText("Save");
         saveButton.addSelectionListener(new SelectionAdapter() {
@@ -62,7 +71,7 @@ public class ParkingEventView {
                 if (autoModelCombo.getSelectIndex() != -1 & customersCombo.getSelectIndex() != -1 &
                         autoCapasityCombo.getSelectIndex() != -1) {
 
-                    new ParkingEventDao().save(autoModelCombo.getSelectObject(), customersCombo.getSelectObject(), autoCapasityCombo.getSelectObject());
+                    new ParkingEventDao().save(autoModelCombo.getSelectObject(), customersCombo.getSelectObject(), autoCapasityCombo.getSelectObject(), autoNumber.getText());
                     updateTable();
 
                 }

@@ -15,8 +15,8 @@ public class ParkingEventDao extends AbstractDao<ParkingEvent> {
 //        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(ParkingEvent.class, id);
 //    }
 
-    public void save(AutoModel autoModel, Customers customers, AutoCapacity autoCapacity) {
-        save(new ParkingEvent(autoModel, customers, autoCapacity));
+    public void save(AutoModel autoModel, Customers customers, AutoCapacity autoCapacity, String autoNumber) {
+        save(new ParkingEvent(autoModel, customers, autoCapacity, autoNumber));
     }
 
     public List<ParkingEvent> findAll() {
